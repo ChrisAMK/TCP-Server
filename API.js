@@ -1,9 +1,11 @@
 import MKY021 from "./models/mky021.js";
 import MKY08 from "./models/mky08.js"
 
+const invalidValue = "Invalid Value Entered";
+
 export default {
 
-    saveRig8: (data) => {
+    saveRig8: (uData) => {
 
         let dataToBeSent = {
             
@@ -67,7 +69,7 @@ export default {
 
     },
 
-    saveRig21: (data) => {
+    saveRig21: (uData) => {
 
         let dataToBeSent = {
             
@@ -79,9 +81,9 @@ export default {
             holeDepth: uData[19] * 256 + uData[18] / 10     || invalidValue,
             rotationRpm: uData[23] * 256 + uData[22] / 10   || invalidValue,
             penetrationRate: uData[25] * 256 + uData[24]    || invalidValue,
-            mastAngle: uData[27] * 256 + uData[26]          || invalidValue,
-            deckRoll: uData[29] * 256 + uData[28]           || invalidValue,
-            deckPitch: uData[31] * 256 + uData[30]          || invalidValue,
+            mastAngle: uData[27] * 256 + uData[26] / 100          || invalidValue,
+            deckRoll: ((uData[29] * 256 + uData[28]) / 100)          || invalidValue,
+            deckPitch: ((uData[31] * 256 + uData[30]) / 100)        || invalidValue,
             headRackBackProxyStatus: uData[32],
             footClampPressureSwitch: uData[33],
             coolantLevelSensor: uData[34],
@@ -90,7 +92,7 @@ export default {
             holdBackPressure: uData[40] * 256 + uData[39] / 10        || invalidValue,
             pulldownPressure: uData[42] * 256 + uData[41] / 10        || invalidValue,
             waterPressure: uData[44] * 256 + uData[43] / 10           || invalidValue,
-            mainPumpPressure: uData[46] * 256 + uData[45] / 10        || invalidValue,
+            mainPumpPressure: uData[46] * 256 + uData[45] / 1000        || invalidValue,
             winchDownPressure: uData[48] * 256 + uData[47] / 10       || invalidValue,
             winchUpPressure: uData[50] * 256 + uData[49] / 10         || invalidValue,
             driller1: uData[51],
@@ -102,6 +104,22 @@ export default {
             driller1: uData[57],
             driller1: uData[58]
         }
+
+        // Error Checking
+
+        if (dataToBeSent.penetrationRate > 90) {
+            console.log("Penetration RATE:", dataToBeSent.penetrationRate)
+            dataToBeSent.penetrationRate = "Invalid Value"
+        };
+
+        if (dataToBeSent.oilPressure > 90) {
+            console.log("OIL PRESSURE:", dataToBeSent.oilPressure)
+            dataToBeSent.oilPressure = "Invalid Value"
+        };
+
+
+        
+        console.log(dataToBeSent)
 
         MKY021.create({
             ts: dataToBeSent.ts,
@@ -127,7 +145,7 @@ export default {
             mainPumpPressure: dataToBeSent.mainPumpPressure,
             winchDownPressure: dataToBeSent.winchDownPressure,
             winchUpPressure: dataToBeSent.winchUpPressure
-        });
+        }).then(() => console.log("Log Created"));
     }
 
 

@@ -1,14 +1,6 @@
 import Sequelize from "sequelize";
+import config from './config.json';
 // Defining MKY0811 Model
-
-// Configuring Sequelize
-const config = {
-  username: "chris",
-  password: "root",
-  database: "CMS",
-  host: "localhost",
-  dialect: "mysql"
-}
 
 var sequelize = new Sequelize(config.database, config.username, config.password, {
   host: config.host,
@@ -18,16 +10,6 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
 
 
 const MKY021 = sequelize.define("MKY021", {
-
-  clientID: {
-    type: Sequelize.DataTypes.STRING,
-    allowNull: true
-  },
-
-  topic: {
-    type: Sequelize.DataTypes.STRING,
-    allowNull: true
-  },
 
   time: {
       type: Sequelize.DataTypes.STRING,

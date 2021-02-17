@@ -2,8 +2,6 @@ import net from "net";
 import MKY021 from "./models/mky021.js";
 import API from "./API.js";
 
-const invalidValue = "Invalid Value Entered";
-
 MKY021.sequelize.sync().then(() => {
 
     const server = net.createServer((socket) => {
@@ -28,6 +26,7 @@ MKY021.sequelize.sync().then(() => {
                 case 21:
                     // Rig 8 Code
                     API.saveRig21(data);
+                    console.log("Testing")
                     break;
 
                 default:
@@ -42,7 +41,7 @@ MKY021.sequelize.sync().then(() => {
 
     });
 
-    server.listen(1337, '192.168.5.10', () => {
+    server.listen(1337, '192.168.1.31', () => {
         console.log('Server Starting! on: ', server.address());
     });
 });
