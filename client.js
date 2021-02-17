@@ -2,9 +2,9 @@
 import net from 'net';
 
 const client = new net.Socket();
-client.connect(1337, '192.168.5.10', () => {
+client.connect(1337, '192.168.1.31', () => {
     console.log('Connected');
-    client.write('Hello, Server! ')
+    client.write('Hello, Server! ');
 });
 
 client.on('data', (data) => {
