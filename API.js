@@ -51,7 +51,6 @@ export default {
 
         dataToBeSent.driller = drillerString;
 
-
         MKY08.create({
             ts: dataToBeSent.ts,
             engineRPM: dataToBeSent.engineRPM,
@@ -82,10 +81,9 @@ export default {
     },
 
     saveRig21: (uData) => {
-
+        console.log("Starting Function")
         let dataToBeSent = {
             
-
             engineRpm: (uData[11] * 256 + uData[10] / 10)   || invalidValue,
             oilPressure: uData[13] * 256 + uData[12] / 10   || invalidValue,
             engineHours: uData[59] * 256 + uData[60]        || invalidValue,
@@ -108,8 +106,10 @@ export default {
             mainPumpPressure: uData[46] * 256 + uData[45] / 1000        || invalidValue,
             winchDownPressure: uData[48] * 256 + uData[47] / 10       || invalidValue,
             winchUpPressure: uData[50] * 256 + uData[49] / 10         || invalidValue,
+            bitWeight: uData[64] * 265 + uData[63] / 10                    || invalidValue,
+            driller: "Not Signed in"
         }
-
+        console.log(dataToBeSent);
         let drillerString = "";
         let driller = {
             driller1: uData[51],
@@ -125,23 +125,21 @@ export default {
         for (let i = 0; i < driller.length; i++) {
             drillerString.concat(String.fromCharCode(driller[i]));
         }
-
+        console.log(drillerString, "HEY")
         dataToBeSent.driller = drillerString;
 
         // Error Checking
-
+        console.log(dataToBeSent.driller);
         if (dataToBeSent.penetrationRate > 90) {
             console.log("Penetration RATE:", dataToBeSent.penetrationRate)
-            dataToBeSent.penetrationRate = "Invalid Value"
+            dataToBeSent.penetrationRate = null
         };
 
         if (dataToBeSent.oilPressure > 90) {
             console.log("OIL PRESSURE:", dataToBeSent.oilPressure)
-            dataToBeSent.oilPressure = "Invalid Value"
+            dataToBeSent.oilPressure = null
         };
-
-        console.log(dataToBeSent)
-
+        console.log(dataToBeSent);
         MKY021.create({
             ts: dataToBeSent.ts,
             engineRPM: dataToBeSent.engineRPM,
@@ -167,7 +165,7 @@ export default {
             winchDownPressure: dataToBeSent.winchDownPressure,
             winchUpPressure: dataToBeSent.winchUpPressure,
             bitWeight: dataToBeSent.bitWeight,
-            driller: dataToBeSent.driller
+            driller: dataToBeSent.driller || "IN"
         }).then(() => console.log("Log Created"));
     }
 

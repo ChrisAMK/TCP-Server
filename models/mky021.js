@@ -126,6 +126,16 @@ const MKY021 = sequelize.define("MKY021", {
     allowNull: true,
   },
 
+  bitWeight: {
+    type: Sequelize.DataTypes.STRING,
+    allowNull: true,
+  },
+
+  driller: {
+    type: Sequelize.DataTypes.STRING,
+    allowNull: true,
+  },
+
   createdAt: {
     type: 'TIMESTAMP',
     defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
