@@ -31,15 +31,26 @@ export default {
             mainPumpPressure: uData[46] * 256 + uData[45] / 10        || invalidValue,
             winchDownPressure: uData[48] * 256 + uData[47] / 10       || invalidValue,
             winchUpPressure: uData[50] * 256 + uData[49] / 10         || invalidValue,
-            driller1: uData[51],
-            driller1: uData[52],
-            driller1: uData[53],
-            driller1: uData[54],
-            driller1: uData[55],
-            driller1: uData[56],
-            driller1: uData[57],
-            driller1: uData[58]
+            
         }
+        let drillerString = "";
+        let driller = {
+            driller1: uData[51],
+            driller2: uData[52],
+            driller3: uData[53],
+            driller4: uData[54],
+            driller5: uData[55],
+            driller6: uData[56],
+            driller7: uData[57],
+            driller8: uData[58]
+        }
+        
+        for (let i = 0; i < driller.length; i++) {
+            drillerString.concat(String.fromCharCode(driller[i]));
+        }
+
+        dataToBeSent.driller = drillerString;
+
 
         MKY08.create({
             ts: dataToBeSent.ts,
@@ -64,7 +75,8 @@ export default {
             waterPressure: dataToBeSent.waterPressure,
             mainPumpPressure: dataToBeSent.mainPumpPressure,
             winchDownPressure: dataToBeSent.winchDownPressure,
-            winchUpPressure: dataToBeSent.winchUpPressure
+            winchUpPressure: dataToBeSent.winchUpPressure,
+            driller: dataToBeSent.driller
         });
 
     },
@@ -73,6 +85,7 @@ export default {
 
         let dataToBeSent = {
             
+
             engineRpm: (uData[11] * 256 + uData[10] / 10)   || invalidValue,
             oilPressure: uData[13] * 256 + uData[12] / 10   || invalidValue,
             engineHours: uData[59] * 256 + uData[60]        || invalidValue,
@@ -95,15 +108,25 @@ export default {
             mainPumpPressure: uData[46] * 256 + uData[45] / 1000        || invalidValue,
             winchDownPressure: uData[48] * 256 + uData[47] / 10       || invalidValue,
             winchUpPressure: uData[50] * 256 + uData[49] / 10         || invalidValue,
-            driller1: uData[51],
-            driller1: uData[52],
-            driller1: uData[53],
-            driller1: uData[54],
-            driller1: uData[55],
-            driller1: uData[56],
-            driller1: uData[57],
-            driller1: uData[58]
         }
+
+        let drillerString = "";
+        let driller = {
+            driller1: uData[51],
+            driller2: uData[52],
+            driller3: uData[53],
+            driller4: uData[54],
+            driller5: uData[55],
+            driller6: uData[56],
+            driller7: uData[57],
+            driller8: uData[58]
+        }
+        
+        for (let i = 0; i < driller.length; i++) {
+            drillerString.concat(String.fromCharCode(driller[i]));
+        }
+
+        dataToBeSent.driller = drillerString;
 
         // Error Checking
 
@@ -117,8 +140,6 @@ export default {
             dataToBeSent.oilPressure = "Invalid Value"
         };
 
-
-        
         console.log(dataToBeSent)
 
         MKY021.create({
@@ -144,7 +165,9 @@ export default {
             waterPressure: dataToBeSent.waterPressure,
             mainPumpPressure: dataToBeSent.mainPumpPressure,
             winchDownPressure: dataToBeSent.winchDownPressure,
-            winchUpPressure: dataToBeSent.winchUpPressure
+            winchUpPressure: dataToBeSent.winchUpPressure,
+            bitWeight: dataToBeSent.bitWeight,
+            driller: dataToBeSent.driller
         }).then(() => console.log("Log Created"));
     }
 
