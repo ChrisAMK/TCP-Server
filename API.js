@@ -1,5 +1,7 @@
 import MKY021 from "./models/mky021.js";
-import MKY08 from "./models/mky08.js"
+import MKY021RAW from './models/mky021raw.js';
+import MKY08 from "./models/mky08.js";
+import MKY08RAW from "./models/mky08raw.js";
 
 const invalidValue = null;
 
@@ -83,7 +85,7 @@ export default {
     saveRig21: (uData) => {
 
 
-        let preCalcualtions = {
+        let preCalculations = {
             
             // DATA CALCULATIONS
             engineRpm: uData[11] * 256 + uData[10]                  || invalidValue,
