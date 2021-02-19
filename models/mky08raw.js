@@ -9,7 +9,7 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
 });
 
 
-const MKY08 = sequelize.define("MKY08", {
+const MKY08RAW = sequelize.define("MKY08RAW", {
 
   time: {
       type: Sequelize.DataTypes.INTEGER,
@@ -138,4 +138,4 @@ const MKY08 = sequelize.define("MKY08", {
 }
 );
 
-export default MKY08;
+export default MKY08RAW;

@@ -81,13 +81,7 @@ export default {
     },
 
     saveRig21: (uData) => {
-        let drillerString = "";
-        let driller = [uData[51],uData[52],uData[53],uData[54],uData[55],uData[56], uData[57],uData[58]]
-    
-        for (let i = 0; i < driller.length; i++) {
-            drillerString.concat(String.fromCharCode(driller[i]));
-        }
-        postCalculations.driller = drillerString;
+
 
         let preCalcualtions = {
             
@@ -148,6 +142,13 @@ export default {
         }
         console.log(postCalculations);
         
+        let drillerString = "";
+        let driller = [uData[51],uData[52],uData[53],uData[54],uData[55],uData[56], uData[57],uData[58]]
+    
+        for (let i = 0; i < driller.length; i++) {
+            drillerString.concat(String.fromCharCode(driller[i]));
+        }
+        postCalculations.driller = drillerString;
 
         // Error Checking
         console.log(postCalculations.driller);
@@ -213,8 +214,8 @@ export default {
             mainPumpPressure: preCalculations.mainPumpPressure,
             winchDownPressure: preCalculations.winchDownPressure,
             winchUpPressure: preCalculations.winchUpPressure,
-            bitWeight: preCalculations.bitWeight,
-            driller: preCalculations.driller
+            bitWeight: postCalculations.bitWeight,
+            driller: postCalculations.driller || null
         }).then(() => console.log("Log Created"));
 
     }
