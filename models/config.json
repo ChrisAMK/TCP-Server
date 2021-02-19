@@ -1,6 +1,6 @@
 { 
   "username": "root",
-  "password": "Sm0thering.",
+  "password": "root",
   "database": "Rig021",
   "host": "localhost",
   "dialect": "mysql"

@@ -8,8 +8,7 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
   logging: false
 });
 
-
-const MKY021 = sequelize.define("MKY021", {
+const MKY021RAW = sequelize.define("MKY021RAW", {
 
   time: {
       type: Sequelize.DataTypes.INTEGER,
@@ -72,17 +71,17 @@ const MKY021 = sequelize.define("MKY021", {
   },
 
   headRackBackProxyStatus: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: Sequelize.DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   footClampPressureSwitch: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: Sequelize.DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   coolantLevelSensor: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: Sequelize.DataTypes.BOOLEAN,
     allowNull: true,
   },
 
@@ -148,4 +147,4 @@ const MKY021 = sequelize.define("MKY021", {
 }
 );
 
-export default MKY021;
+export default MKY021RAW;
