@@ -32,9 +32,9 @@ export default {
             waterPressure: uData[44] * 256 + uData[43] / 10           || invalidValue,
             mainPumpPressure: uData[46] * 256 + uData[45] / 10        || invalidValue,
             winchDownPressure: uData[48] * 256 + uData[47] / 10       || invalidValue,
-            winchUpPressure: uData[50] * 256 + uData[49] / 10         || invalidValue,
-            
+            winchUpPressure: uData[50] * 256 + uData[49] / 10         || invalidValue
         }
+
         let drillerString = "";
         let driller = {
             driller1: uData[51],
@@ -117,17 +117,17 @@ export default {
         let postCalculations = {
             
             // DATA CALCULATIONS
-            engineRpm: (uData[11] * 256 + uData[10] / 10)   || invalidValue,
-            oilPressure: uData[13] * 256 + uData[12] / 10   || invalidValue,
-            engineHours: uData[59] * 256 + uData[60]        || invalidValue,
-            coolantTemp: uData[15] * 256 + uData[14] / 10   || invalidValue,
-            headPosition: uData[17] * 256 + uData[16] /10   || invalidValue,
-            holeDepth: uData[19] * 256 + uData[18] / 10     || invalidValue,
-            rotationRpm: uData[23] * 256 + uData[22] / 10   || invalidValue,
-            penetrationRate: uData[25] * 256 + uData[24]    || invalidValue,
-            mastAngle: uData[27] * 256 + uData[26] / 100                || invalidValue,
-            deckRoll: ((uData[29] * 256 + uData[28]) / 100)             || invalidValue,
-            deckPitch: ((uData[31] * 256 + uData[30]) / 100)            || invalidValue,
+            engineRpm: (uData[11] * 256 + uData[10] / 10)           || invalidValue,
+            oilPressure: uData[13] * 256 + uData[12] / 10           || invalidValue,
+            engineHours: uData[59] * 256 + uData[60]                || invalidValue,
+            coolantTemp: uData[15] * 256 + uData[14] / 10           || invalidValue,
+            headPosition: uData[17] * 256 + uData[16] /10           || invalidValue,
+            holeDepth: uData[19] * 256 + uData[18] / 10             || invalidValue,
+            rotationRpm: uData[23] * 256 + uData[22] / 10           || invalidValue,
+            penetrationRate: uData[25] * 256 + uData[24]            || invalidValue,
+            mastAngle: uData[27] * 256 + uData[26] / 100            || invalidValue,
+            deckRoll: ((uData[29] * 256 + uData[28]) / 100)         || invalidValue,
+            deckPitch: ((uData[31] * 256 + uData[30]) / 100)        || invalidValue,
             headRackBackProxyStatus: uData[32],
             footClampPressureSwitch: uData[33],
             coolantLevelSensor: uData[34],
@@ -142,7 +142,6 @@ export default {
             bitWeight: uData[64] * 265 + uData[63] / 10                         || invalidValue,
             driller: "Not Signed in"
         }
-        console.log(postCalculations);
         
         let drillerString = "";
         let driller = [uData[51],uData[52],uData[53],uData[54],uData[55],uData[56], uData[57],uData[58]]
@@ -153,17 +152,65 @@ export default {
         postCalculations.driller = drillerString;
 
         // Error Checking
-        console.log(postCalculations.driller);
-        if (postCalculations.penetrationRate > 90) {
-            console.log("Penetration RATE:", postCalculations.penetrationRate)
-            postCalculations.penetrationRate = null
+        if (postCalculations.oilPressure > 90) {
+            console.log("Engine Oil: ", postCalculations.oilPressure > 50000);
         };
 
-        if (postCalculations.oilPressure > 90) {
-            console.log("OIL PRESSURE:", postCalculations.oilPressure)
-            postCalculations.oilPressure = null
+        if (postCalculations.penetrationRate > 50000) {
+            console.log("Penetration Rate: ", postCalculations.penetrationRate);
+            postCalculations.rotationReversePressure = null;
         };
-        console.log(postCalculations);
+
+        if (postCalculations.rotationForwardPressure > 50000) {
+            console.log("Rotation Forward Pressure: ", postCalculations.rotationForwardPressure);
+            postCalculations.rotationForwardPressure = null;
+        }
+
+        if (postCalculations.rotationReversePressure > 50000) {
+            console.log("Rotation Reverse Pressure: ", postCalculations.rotationReversePressure)
+            postCalculations.rotationReversePressure = null
+        };
+
+        if (postCalculations.rotationRpm > 50000) {
+            console.log("Rotation RPM: ", postCalculations.rotationRpm);
+            postCalculations.rotationRpm = null;
+        }
+
+        if (postCalculations.holdBackPressure > 50000) {
+            console.log("OIL PRESSURE:", postCalculations.holdBackPressure)
+            postCalculations.holdBackPressure = null
+        };
+
+        if (postCalculations.pulldownPressure > 50000) {
+            console.log("OIL PRESSURE:", postCalculations.pulldownPressure)
+            postCalculations.pulldownPressure = null
+        };
+
+        if (postCalculations.waterPressure > 50000) {
+            console.log("OIL PRESSURE:", postCalculations.waterPressure)
+            postCalculations.waterPressure = null
+        };
+
+        if (postCalculations.mainPumpPressure > 50000) {
+            console.log("OIL PRESSURE:", postCalculations.mainPumpPressure)
+            postCalculations.mainPumpPressure = null
+        };
+
+        if (postCalculations.winchUpPressure > 50000) {
+            console.log("OIL PRESSURE:", postCalculations.winchUpPressure)
+            postCalculations.winchUpPressure = null
+        };
+
+        if (postCalculations.winchDownPressure > 50000) {
+            console.log("OIL PRESSURE:", postCalculations.winchDownPressure)
+            postCalculations.winchDownPressure = null
+        };
+
+        if (postCalculations.bitWeight > 50000) {
+            console.log("OIL PRESSURE:", postCalculations.bitWeight)
+            postCalculations.bitWeight = null
+        };
+    
         MKY021.create({
             ts: postCalculations.ts,
             engineRPM: postCalculations.engineRPM,

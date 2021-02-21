@@ -2,7 +2,15 @@ import net from "net";
 import db from "./models/index.js";
 import API from "./API.js";
 
-db.sequelize.sync().then(() => {
+const syncModels = async () => {
+    db.MKY021.sync();
+    db.MKY021RAW.sync();
+    db.MKY08.sync();
+    db.MKY08RAW.sync();
+}
+
+
+syncModels().then(() => {
 
     const server = net.createServer((socket) => {
         socket.write('Echo server\r\n');
@@ -42,7 +50,7 @@ db.sequelize.sync().then(() => {
 
     });
 
-    server.listen(1337, '192.168.1.31', () => {
+    server.listen(1337, '192.168.8.10', () => {
         console.log('Server Starting! on: ', server.address());
     });
 });

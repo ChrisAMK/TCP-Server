@@ -5,7 +5,7 @@ import config from './config.json';
 var sequelize = new Sequelize(config.database, config.username, config.password, {
   host: config.host,
   dialect: "mysql",
-  logging: false
+  // logging: false
 });
 
 
