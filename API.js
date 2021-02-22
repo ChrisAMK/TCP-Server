@@ -85,6 +85,35 @@ export default {
     saveRig21: (uData) => {
 
 
+        let rawCalculations = {
+            
+            // DATA CALCULATIONS
+            engineRpm: uData[11] * 256 + uData[10]                  || invalidValue,
+            oilPressure: uData[13] * 256 + uData[12]                || invalidValue,
+            engineHours: uData[59] * 256 + uData[60]                || invalidValue,
+            coolantTemp: uData[15] * 256 + uData[14]                || invalidValue,
+            headPosition: uData[17] * 256 + uData[16]               || invalidValue,
+            holeDepth: uData[19] * 256 + uData[18]                  || invalidValue,
+            rotationRpm: uData[23] * 256 + uData[22]                || invalidValue,
+            penetrationRate: uData[25] * 256 + uData[24]            || invalidValue,
+            mastAngle: uData[27] * 256 + uData[26]                  || invalidValue,
+            deckRoll: uData[29] * 256 + uData[28]                   || invalidValue,
+            deckPitch: uData[31] * 256 + uData[30]                  || invalidValue,
+            headRackBackProxyStatus: uData[32],
+            footClampPressureSwitch: uData[33],
+            coolantLevelSensor: uData[34],
+            rotationReversePressure: uData[36] * 256 + uData[35]     || invalidValue,
+            rotationForwardPressure: uData[38] * 256 + uData[37]     || invalidValue,
+            holdBackPressure: uData[40] * 256 + uData[39]            || invalidValue,
+            pulldownPressure: uData[42] * 256 + uData[41]            || invalidValue,
+            waterPressure: uData[44] * 256 + uData[43]               || invalidValue,
+            mainPumpPressure: uData[46] * 256 + uData[45]            || invalidValue,
+            winchDownPressure: uData[48] * 256 + uData[47]           || invalidValue,
+            winchUpPressure: uData[50] * 256 + uData[49]             || invalidValue,
+            bitWeight: uData[64] * 265 + uData[63]                   || invalidValue,
+            driller: "Not Signed in"
+        }
+
         let preCalculations = {
             
             // DATA CALCULATIONS
@@ -114,35 +143,6 @@ export default {
             driller: "Not Signed in"
         }
 
-        let postCalculations = {
-            
-            // DATA CALCULATIONS
-            engineRpm: (uData[11] * 256 + uData[10] / 10)           || invalidValue,
-            oilPressure: uData[13] * 256 + uData[12] / 10           || invalidValue,
-            engineHours: uData[59] * 256 + uData[60]                || invalidValue,
-            coolantTemp: (uData[15] * 256 + uData[14]) / 10           || invalidValue,
-            headPosition: uData[17] * 256 + uData[16] /10           || invalidValue,
-            holeDepth: uData[19] * 256 + uData[18] / 10             || invalidValue,
-            rotationRpm: uData[23] * 256 + uData[22] / 10           || invalidValue,
-            penetrationRate: uData[25] * 256 + uData[24]            || invalidValue,
-            mastAngle: uData[27] * 256 + uData[26] / 100            || invalidValue,
-            deckRoll: ((uData[29] * 256 + uData[28]) / 100)         || invalidValue,
-            deckPitch: ((uData[31] * 256 + uData[30]) / 100)        || invalidValue,
-            headRackBackProxyStatus: uData[32],
-            footClampPressureSwitch: uData[33],
-            coolantLevelSensor: uData[34],
-            rotationReversePressure: uData[36] * 256 + uData[35] / 10           || invalidValue,
-            rotationForwardPressure: uData[38] * 256 + uData[37] / 10           || invalidValue,
-            holdBackPressure: (uData[40] * 256 + uData[39]) / 100                 || invalidValue,
-            pulldownPressure: (uData[42] * 256 + uData[41]) / 100                  || invalidValue,
-            waterPressure: uData[44] * 256 + uData[43] / 10                     || invalidValue,
-            mainPumpPressure: (uData[46] * 256 + uData[45]) / 100                || invalidValue,
-            winchDownPressure: uData[48] * 256 + uData[47] / 10                 || invalidValue,
-            winchUpPressure: uData[50] * 256 + uData[49] / 10                   || invalidValue,
-            bitWeight: uData[64] * 265 + uData[63] / 10                         || invalidValue,
-            driller: "Not Signed in"
-        }
-        
         let drillerString = "";
         let driller = [uData[51],uData[52],uData[53],uData[54],uData[55],uData[56], uData[57],uData[58]]
     
@@ -152,65 +152,97 @@ export default {
         postCalculations.driller = drillerString;
 
         // Error Checking
-        if (postCalculations.oilPressure > 50000) {
+
+        if (preCalculations.oilPressure > 50000) {
             console.log("Engine Oil: ", postCalculations.oilPressure > 50000);
             postCalculations.oilPressure = null;
         };
 
-        if (postCalculations.penetrationRate > 50000) {
+        if (preCalculations.penetrationRate > 50000) {
             console.log("Penetration Rate: ", postCalculations.penetrationRate);
             postCalculations.penetrationRate = null;
         };
 
-        if (postCalculations.rotationForwardPressure > 50000) {
+        if (preCalculations.rotationForwardPressure > 50000) {
             console.log("Rotation Forward Pressure: ", postCalculations.rotationForwardPressure);
             postCalculations.rotationForwardPressure = null;
         }
 
-        if (postCalculations.rotationReversePressure > 50000) {
+        if (preCalculations.rotationReversePressure > 50000) {
             console.log("Rotation Reverse Pressure: ", postCalculations.rotationReversePressure)
             postCalculations.rotationReversePressure = null
         };
 
-        if (postCalculations.rotationRpm > 50000) {
+        if (preCalculations.rotationRpm > 50000) {
             console.log("Rotation RPM: ", postCalculations.rotationRpm);
             postCalculations.rotationRpm = null;
         }
 
-        if (postCalculations.holdBackPressure > 50000) {
+        if (preCalculations.holdBackPressure > 50000) {
             console.log("OIL PRESSURE:", postCalculations.holdBackPressure)
             postCalculations.holdBackPressure = null
         };
 
-        if (postCalculations.pulldownPressure > 50000) {
+        if (preCalculations.pulldownPressure > 50000) {
             console.log("OIL PRESSURE:", postCalculations.pulldownPressure)
-            postCalculations.pulldownPressure = null
+            postCalculations.pulldownPressure = null;
         };
 
-        if (postCalculations.waterPressure > 50000) {
+        if (preCalculations.waterPressure > 50000) {
             console.log("OIL PRESSURE:", postCalculations.waterPressure)
-            postCalculations.waterPressure = null
+            postCalculations.waterPressure = null;
         };
 
-        if (postCalculations.mainPumpPressure > 50000) {
+        if (preCalculations.mainPumpPressure > 50000) {
             console.log("OIL PRESSURE:", postCalculations.mainPumpPressure)
             postCalculations.mainPumpPressure = null
         };
 
-        if (postCalculations.winchUpPressure > 50000) {
+        if (preCalculations.winchUpPressure > 50000) {
             console.log("OIL PRESSURE:", postCalculations.winchUpPressure)
             postCalculations.winchUpPressure = null
         };
 
-        if (postCalculations.winchDownPressure > 50000) {
+        if (preCalculations.winchDownPressure > 50000) {
             console.log("OIL PRESSURE:", postCalculations.winchDownPressure)
             postCalculations.winchDownPressure = null
         };
 
-        if (postCalculations.bitWeight > 50000) {
+        if (preCalculations.bitWeight > 50000) {
             console.log("OIL PRESSURE:", postCalculations.bitWeight)
             postCalculations.bitWeight = null
         };
+
+        let postCalculations = {
+            
+            // DATA CALCULATIONS
+            engineRpm: (preCalculations.engineRpm / 10)                 || invalidValue,
+            oilPressure: preCalculations.oilPressure / 10               || invalidValue,
+            engineHours: preCalculations.engineHours                    || invalidValue,
+            coolantTemp: (preCalculations.coolantTemp) / 10             || invalidValue,
+            headPosition: preCalculations.headPosition /10              || invalidValue,
+            holeDepth: preCalculations.holeDepth / 10                   || invalidValue,
+            rotationRpm: preCalculations.rotationRpm / 10               || invalidValue,
+            penetrationRate: preCalculations.penetrationRate / 10       || invalidValue,
+            mastAngle: preCalculations.mastAngle / 100                  || invalidValue,
+            deckRoll: ((preCalculations.deckRoll) / 100)                || invalidValue,
+            deckPitch: ((preCalculations.deckPitch) / 100)              || invalidValue,
+            headRackBackProxyStatus: uData[32],
+            footClampPressureSwitch: uData[33],
+            coolantLevelSensor: uData[34],
+            rotationReversePressure: preCalculations.rotationReversePressure / 10             || invalidValue,
+            rotationForwardPressure: preCalculations.rotationForwardPressure / 10             || invalidValue,
+            holdBackPressure: (preCalculations.holdBackPressure) / 100                        || invalidValue,
+            pulldownPressure: (preCalculations.pulldownPressure) / 100                        || invalidValue,
+            waterPressure: preCalculations.waterPressure / 10                                 || invalidValue,
+            mainPumpPressure: (preCalculations.mainPumpPressure) / 100                        || invalidValue,
+            winchDownPressure: preCalculations.winchDownPressure / 10                         || invalidValue,
+            winchUpPressure: preCalculations.winchUpPressure / 10                             || invalidValue,
+            bitWeight: preCalculations.bitWeight / 10                                         || invalidValue,
+            driller: "Not Signed in"
+        }
+        
+       
         console.log(postCalculations)
         MKY021.create({
             ts: postCalculations.ts,
@@ -241,29 +273,29 @@ export default {
         }).then(() => console.log("Log Created"));
 
         MKY021RAW.create({
-            ts: preCalculations.ts,
-            engineRPM: preCalculations.engineRPM,
-            oilPressure: preCalculations.oilPressure,
-            engineHours: preCalculations.engineHours,
-            coolantTemp: preCalculations.coolantTemp,
-            headPosition: preCalculations.headPosition,
-            holeDepth: preCalculations.holeDepth,
-            rotationRpm: preCalculations.rotationRpm,
-            penetrationRate: preCalculations.penetrationRate,
-            mastAngle: preCalculations.mastAngle,
-            deckRoll: preCalculations.deckRoll,
-            deckPitch: preCalculations.deckPitch,
-            headRackBackProxyStatus: preCalculations.headRackBackProxyStatus,
-            footClampPressureSwitch: preCalculations.footClampPressureSwitch,
-            coolantLevelSensor: preCalculations.coolantLevelSensor,
-            rotationReversePressure: preCalculations.rotationReversePressure,
-            rotationForwardPressure: preCalculations.rotationForwardPressure,
-            holdBackPressure: preCalculations.holdBackPressure,
-            pulldownPressure: preCalculations.pulldownPressure,
-            waterPressure: preCalculations.waterPressure,
-            mainPumpPressure: preCalculations.mainPumpPressure,
-            winchDownPressure: preCalculations.winchDownPressure,
-            winchUpPressure: preCalculations.winchUpPressure,
+            ts: rawCalculations.ts,
+            engineRPM: rawCalculations.engineRPM,
+            oilPressure: rawCalculations.oilPressure,
+            engineHours: rawCalculations.engineHours,
+            coolantTemp: rawCalculations.coolantTemp,
+            headPosition: rawCalculations.headPosition,
+            holeDepth: rawCalculations.holeDepth,
+            rotationRpm: rawCalculations.rotationRpm,
+            penetrationRate: rawCalculations.penetrationRate,
+            mastAngle: rawCalculations.mastAngle,
+            deckRoll: rawCalculations.deckRoll,
+            deckPitch: rawCalculations.deckPitch,
+            headRackBackProxyStatus: rawCalculations.headRackBackProxyStatus,
+            footClampPressureSwitch: rawCalculations.footClampPressureSwitch,
+            coolantLevelSensor: rawCalculations.coolantLevelSensor,
+            rotationReversePressure: rawCalculations.rotationReversePressure,
+            rotationForwardPressure: rawCalculations.rotationForwardPressure,
+            holdBackPressure: rawCalculations.holdBackPressure,
+            pulldownPressure: rawCalculations.pulldownPressure,
+            waterPressure: rawCalculations.waterPressure,
+            mainPumpPressure: rawCalculations.mainPumpPressure,
+            winchDownPressure: rawCalculations.winchDownPressure,
+            winchUpPressure: rawCalculations.winchUpPressure,
             bitWeight: postCalculations.bitWeight,
             driller: postCalculations.driller || null
         }).then(() => console.log("Log Created"));
