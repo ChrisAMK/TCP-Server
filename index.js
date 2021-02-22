@@ -50,7 +50,7 @@ syncModels().then(() => {
 
     });
 
-    server.listen(1337, '192.168.8.10', () => {
+    server.listen(1337, '192.168.1.31', () => {
         console.log('Server Starting! on: ', server.address());
     });
 });

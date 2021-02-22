@@ -120,7 +120,7 @@ export default {
             engineRpm: (uData[11] * 256 + uData[10] / 10)           || invalidValue,
             oilPressure: uData[13] * 256 + uData[12] / 10           || invalidValue,
             engineHours: uData[59] * 256 + uData[60]                || invalidValue,
-            coolantTemp: uData[15] * 256 + uData[14] / 10           || invalidValue,
+            coolantTemp: (uData[15] * 256 + uData[14]) / 10           || invalidValue,
             headPosition: uData[17] * 256 + uData[16] /10           || invalidValue,
             holeDepth: uData[19] * 256 + uData[18] / 10             || invalidValue,
             rotationRpm: uData[23] * 256 + uData[22] / 10           || invalidValue,
@@ -133,10 +133,10 @@ export default {
             coolantLevelSensor: uData[34],
             rotationReversePressure: uData[36] * 256 + uData[35] / 10           || invalidValue,
             rotationForwardPressure: uData[38] * 256 + uData[37] / 10           || invalidValue,
-            holdBackPressure: uData[40] * 256 + uData[39] / 10                  || invalidValue,
-            pulldownPressure: uData[42] * 256 + uData[41] / 10                  || invalidValue,
+            holdBackPressure: (uData[40] * 256 + uData[39]) / 100                 || invalidValue,
+            pulldownPressure: (uData[42] * 256 + uData[41]) / 100                  || invalidValue,
             waterPressure: uData[44] * 256 + uData[43] / 10                     || invalidValue,
-            mainPumpPressure: uData[46] * 256 + uData[45] / 1000                || invalidValue,
+            mainPumpPressure: (uData[46] * 256 + uData[45]) / 100                || invalidValue,
             winchDownPressure: uData[48] * 256 + uData[47] / 10                 || invalidValue,
             winchUpPressure: uData[50] * 256 + uData[49] / 10                   || invalidValue,
             bitWeight: uData[64] * 265 + uData[63] / 10                         || invalidValue,
@@ -152,13 +152,14 @@ export default {
         postCalculations.driller = drillerString;
 
         // Error Checking
-        if (postCalculations.oilPressure > 90) {
+        if (postCalculations.oilPressure > 50000) {
             console.log("Engine Oil: ", postCalculations.oilPressure > 50000);
+            postCalculations.oilPressure = null;
         };
 
         if (postCalculations.penetrationRate > 50000) {
             console.log("Penetration Rate: ", postCalculations.penetrationRate);
-            postCalculations.rotationReversePressure = null;
+            postCalculations.penetrationRate = null;
         };
 
         if (postCalculations.rotationForwardPressure > 50000) {
@@ -210,7 +211,7 @@ export default {
             console.log("OIL PRESSURE:", postCalculations.bitWeight)
             postCalculations.bitWeight = null
         };
-    
+        console.log(postCalculations)
         MKY021.create({
             ts: postCalculations.ts,
             engineRPM: postCalculations.engineRPM,
