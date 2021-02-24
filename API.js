@@ -119,7 +119,7 @@ export default {
             // DATA CALCULATIONS
             engineRpm: uData[11] * 256 + uData[10]                  || invalidValue,
             oilPressure: uData[13] * 256 + uData[12]                || invalidValue,
-            engineHours: uData[59] * 256 + uData[60]                || invalidValue,
+            engineHours: uData[60] * 256 + uData[59]                || invalidValue,
             coolantTemp: uData[15] * 256 + uData[14]                || invalidValue,
             headPosition: uData[17] * 256 + uData[16]               || invalidValue,
             holeDepth: uData[19] * 256 + uData[18]                  || invalidValue,
@@ -140,17 +140,28 @@ export default {
             winchDownPressure: uData[48] * 256 + uData[47]           || invalidValue,
             winchUpPressure: uData[50] * 256 + uData[49]             || invalidValue,
             bitWeight: uData[64] * 265 + uData[63]                   || invalidValue,
+
             driller: "Not Signed in"
         }
 
         let drillerString = "";
-        let driller = [uData[51],uData[52],uData[53],uData[54],uData[55],uData[56], uData[57],uData[58]]
-    
-        for (let i = 0; i < driller.length; i++) {
-            drillerString.concat(String.fromCharCode(driller[i]));
-        }
-        preCalculations.driller = drillerString;
+        
+        let driller1 = String.fromCharCode(uData[51]);
+        let driller2 = String.fromCharCode(uData[52]);
+        let driller3 = String.fromCharCode(uData[53]);
+        let driller4 = String.fromCharCode(uData[54]);
+        let driller5 = String.fromCharCode(uData[55]);
+        let driller6 = String.fromCharCode(uData[56]);
+        let driller7 = String.fromCharCode(uData[57]);
+        let driller8 = String.fromCharCode(uData[58]);
+        
+        let firstFive = (uData[62] * 256 + uData[61]).toString();
+        let secondFive = (uData[66] * 256 + uData[65]).toString();
+        let thridFive = (uData[68] * 256 + uData[67]).toString();
+        let forthFive = (uData[70] * 256 + uData[69]).toString();
 
+        preCalculations.timestamp = firstFive + secondFive + thridFive + forthFive;
+        preCalculations.driller = `${driller1 + driller2 + driller3 + driller4 + driller5 + driller6 + driller7 + driller8}`;
         // Error Checking
 
         if (preCalculations.oilPressure > 50000) {
@@ -239,13 +250,12 @@ export default {
             winchDownPressure: preCalculations.winchDownPressure / 10                         || invalidValue,
             winchUpPressure: preCalculations.winchUpPressure / 10                             || invalidValue,
             bitWeight: preCalculations.bitWeight / 10                                         || invalidValue,
-            driller: "Not Signed in"
+            driller: preCalculations.driller,
+            timestamp: preCalculations.timestamp
         }
-        
-       
         console.log(postCalculations)
         MKY021.create({
-            ts: postCalculations.ts,
+            ts: postCalculations.timestamp,
             engineRPM: postCalculations.engineRPM,
             oilPressure: postCalculations.oilPressure,
             engineHours: postCalculations.engineHours,
@@ -269,11 +279,11 @@ export default {
             winchDownPressure: postCalculations.winchDownPressure,
             winchUpPressure: postCalculations.winchUpPressure,
             bitWeight: postCalculations.bitWeight,
-            driller: postCalculations.driller || "IN"
+            driller: postCalculations.driller || null
         }).then(() => console.log("Log Created"));
 
         MKY021RAW.create({
-            ts: rawCalculations.ts,
+            ts: rawCalculations.timestamp,
             engineRPM: rawCalculations.engineRPM,
             oilPressure: rawCalculations.oilPressure,
             engineHours: rawCalculations.engineHours,
