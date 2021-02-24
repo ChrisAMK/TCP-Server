@@ -149,68 +149,68 @@ export default {
         for (let i = 0; i < driller.length; i++) {
             drillerString.concat(String.fromCharCode(driller[i]));
         }
-        postCalculations.driller = drillerString;
+        preCalculations.driller = drillerString;
 
         // Error Checking
 
         if (preCalculations.oilPressure > 50000) {
-            console.log("Engine Oil: ", postCalculations.oilPressure > 50000);
-            postCalculations.oilPressure = null;
+            console.log("Engine Oil: ", preCalculations.oilPressure > 50000);
+            preCalculations.oilPressure = null;
         };
 
         if (preCalculations.penetrationRate > 50000) {
-            console.log("Penetration Rate: ", postCalculations.penetrationRate);
-            postCalculations.penetrationRate = null;
+            console.log("Penetration Rate: ", preCalculations.penetrationRate);
+            preCalculations.penetrationRate = null;
         };
 
         if (preCalculations.rotationForwardPressure > 50000) {
-            console.log("Rotation Forward Pressure: ", postCalculations.rotationForwardPressure);
-            postCalculations.rotationForwardPressure = null;
+            console.log("Rotation Forward Pressure: ", preCalculations.rotationForwardPressure);
+            preCalculations.rotationForwardPressure = null;
         }
 
         if (preCalculations.rotationReversePressure > 50000) {
-            console.log("Rotation Reverse Pressure: ", postCalculations.rotationReversePressure)
-            postCalculations.rotationReversePressure = null
+            console.log("Rotation Reverse Pressure: ", preCalculations.rotationReversePressure)
+            preCalculations.rotationReversePressure = null
         };
 
         if (preCalculations.rotationRpm > 50000) {
-            console.log("Rotation RPM: ", postCalculations.rotationRpm);
-            postCalculations.rotationRpm = null;
+            console.log("Rotation RPM: ", preCalculations.rotationRpm);
+            preCalculations.rotationRpm = null;
         }
 
         if (preCalculations.holdBackPressure > 50000) {
-            console.log("OIL PRESSURE:", postCalculations.holdBackPressure)
-            postCalculations.holdBackPressure = null
+            console.log("OIL PRESSURE:", preCalculations.holdBackPressure)
+            preCalculations.holdBackPressure = null
         };
 
         if (preCalculations.pulldownPressure > 50000) {
-            console.log("OIL PRESSURE:", postCalculations.pulldownPressure)
-            postCalculations.pulldownPressure = null;
+            console.log("OIL PRESSURE:", preCalculations.pulldownPressure)
+            preCalculations.pulldownPressure = null;
         };
 
         if (preCalculations.waterPressure > 50000) {
-            console.log("OIL PRESSURE:", postCalculations.waterPressure)
-            postCalculations.waterPressure = null;
+            console.log("OIL PRESSURE:", preCalculations.waterPressure)
+            preCalculations.waterPressure = null;
         };
 
         if (preCalculations.mainPumpPressure > 50000) {
-            console.log("OIL PRESSURE:", postCalculations.mainPumpPressure)
-            postCalculations.mainPumpPressure = null
+            console.log("OIL PRESSURE:", preCalculations.mainPumpPressure)
+            preCalculations.mainPumpPressure = null
         };
 
         if (preCalculations.winchUpPressure > 50000) {
-            console.log("OIL PRESSURE:", postCalculations.winchUpPressure)
-            postCalculations.winchUpPressure = null
+            console.log("OIL PRESSURE:", preCalculations.winchUpPressure)
+            preCalculations.winchUpPressure = null
         };
 
         if (preCalculations.winchDownPressure > 50000) {
-            console.log("OIL PRESSURE:", postCalculations.winchDownPressure)
-            postCalculations.winchDownPressure = null
+            console.log("OIL PRESSURE:", preCalculations.winchDownPressure)
+            preCalculations.winchDownPressure = null
         };
 
         if (preCalculations.bitWeight > 50000) {
-            console.log("OIL PRESSURE:", postCalculations.bitWeight)
-            postCalculations.bitWeight = null
+            console.log("OIL PRESSURE:", preCalculations.bitWeight)
+            preCalculations.bitWeight = null
         };
 
         let postCalculations = {
