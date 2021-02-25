@@ -29,6 +29,7 @@ syncModels().then(() => {
                 case 8:
                     // Rig 8 Code here
                     //API.saveRig8(data);
+                    console.log(data)
                     console.log("DATA FROM RIG 08", Math.random(10));
                     break;
 

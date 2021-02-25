@@ -8,7 +8,7 @@ const invalidValue = null;
 export default {
 
     saveRig8: (uData) => {
-
+        console.log(uData)
         let postCalculations = {
             
             engineRpm: (uData[11] * 256 + uData[10] / 10)   || invalidValue,
@@ -84,7 +84,6 @@ export default {
 
     saveRig21: (uData) => {
 
-
         let rawCalculations = {
             
             // DATA CALCULATIONS
@@ -143,8 +142,6 @@ export default {
 
             driller: "Not Signed in"
         }
-
-        let drillerString = "";
         
         let driller1 = String.fromCharCode(uData[51]);
         let driller2 = String.fromCharCode(uData[52]);
