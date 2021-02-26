@@ -50,6 +50,10 @@ syncModels().then(() => {
             //console.log(socket, "This is Socket");
         });
 
+        socket.on('error', (error) => {
+            console.log(error);
+        })
+
     });
 
     server.listen(1337, '192.168.1.31', () => {
