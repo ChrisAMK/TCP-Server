@@ -1,5 +1,5 @@
-import MKY08 from "./models/mky08.js";
-import MKY08RAW from "./models/mky08raw.js";
+import MKY08 from "../models/mky08.js";
+import MKY08RAW from "../models/mky08raw.js";
 
 const invalidValue = null;
 

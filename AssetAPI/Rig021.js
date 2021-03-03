@@ -1,5 +1,5 @@
-import MKY021 from "./models/mky021.js";
-import MKY021RAW from "./models/mky21raw.js";
+import MKY021 from "../models/mky021.js";
+import MKY021RAW from "../models/mky021raw.js";
 
 const invalidValue = null;
 
@@ -53,7 +53,7 @@ export default {
             winchUpPressure: uData[50] * 256 + uData[49]             || invalidValue,
             bitWeight: uData[64] * 265 + uData[63]                   || invalidValue,
             driller: "Not Signed in",
-            timestamp: (((uData[70] << 8 | uData[69]) << 8 | uData[68]) << 8) + uData[67]   || invalidValue,
+            timestamp: parseInt((((uData[66] << 8) + uData[65]).toString() + ((((uData[70] << 8 | uData[69]) << 8 | uData[68]) << 8) + uData[67]).toString()))   || invalidValue,
         }
     
         let preCalculations = {
@@ -83,7 +83,7 @@ export default {
             winchUpPressure: uData[50] * 256 + uData[49]             || invalidValue,
             bitWeight: uData[64] * 265 + uData[63]                   || invalidValue,
             driller: "Not Signed in",
-            timestamp: invalidValue,
+            timestamp: (((uData[66] << 8) + uData[65]).toString() + ((((uData[70] << 8 | uData[69]) << 8 | uData[68]) << 8) + uData[67]).toString())   || invalidValue,
         }
     
         
@@ -96,8 +96,7 @@ export default {
         let driller7 = String.fromCharCode(uData[57]);
         let driller8 = String.fromCharCode(uData[58]);
         
-        let firstFour = toString(uData[66] << 8) + uData[65];
-        console.log(firstFour, "FIRST FORU")
+        console.log(rawCalculations.timestamp)
     
         preCalculations.driller = `${driller1 + driller2 + driller3 + driller4 + driller5 + driller6 + driller7 + driller8}`;
         // Error Checking
@@ -191,7 +190,7 @@ export default {
             driller: preCalculations.driller,
             timestamp: preCalculations.timestamp
         }
-        console.log(postCalculations)
+        // console.log(postCalculations)
         // TIMESTAMPS
         
     

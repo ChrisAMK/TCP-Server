@@ -1,7 +1,7 @@
 import net from "net";
 import db from "./models/index.js";
-import RIG21 from "./AssetAPI/Rig021";
-import RIG8 from "./AssetAPI/Rig08";
+import RIG21 from "./AssetAPI/Rig021.js";
+import RIG8 from "./AssetAPI/Rig08.js";
 
 const syncModels = async () => {
     db.MKY021.sync();
@@ -57,7 +57,7 @@ syncModels().then(() => {
 
     });
 
-    server.listen(1337, 'localhost', () => {
+    server.listen(1337, '192.168.1.31', () => {
         console.log('Server Starting! on: ', server.address());
     });
 });
