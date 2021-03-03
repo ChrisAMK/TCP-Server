@@ -25,12 +25,11 @@ syncModels().then(() => {
         });
 
         socket.on('data', (data) => {
-            //console.log("SOMETHING")
+
             switch (data[9]) {
                 case 8:
                     // Rig 8 Code here
-                    //API.saveRig8(data);
-                    console.log(data)
+                    RIG8.saveRig8(data);
                     console.log("DATA FROM RIG 08", Math.random(10));
                     break;
 
@@ -48,7 +47,6 @@ syncModels().then(() => {
 
         socket.on('end', () => {
             console.log("Closing Connection With Client!")
-            //console.log(socket, "This is Socket");
         });
 
         socket.on('error', (error) => {

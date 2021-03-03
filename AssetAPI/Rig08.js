@@ -57,7 +57,7 @@ export default {
            compressorInterstagePressure: uData[69] * 256 + uData[68]                       || invalidValue,
            DownholeAirPressure: uData[70] * 256 + uData[71]                                || invalidValue,
            engineOilTemp: uData[72] * 256 + uData[73]                                      || invalidValue,
-           timestamp: (((uData[77] << 8 | uData[76]) << 8 | uData[75]) << 8) + uData[74]   || invalidValue,
+           timestamp: parseInt((((uData[75] << 8) + uData[74]).toString() + ((((uData[79] << 8 | uData[78]) << 8 | uData[77]) << 8) + uData[76]).toString()))   || invalidValue,
         }
     
         let preCalculations = {
@@ -91,7 +91,6 @@ export default {
             compressorInterstagePressure: uData[69] * 256 + uData[68]                       || invalidValue,
             DownholeAirPressure: uData[70] * 256 + uData[71]                                || invalidValue,
             engineOilTemp: uData[72] * 256 + uData[73]                                      || invalidValue,
-            timestamp: (((uData[77] << 8 | uData[76]) << 8 | uData[75]) << 8) + uData[74]   || invalidValue,
 
         }
     
@@ -203,26 +202,26 @@ export default {
             holeDepth: preCalculations.holeDepth / 10                   || invalidValue,
             rotationRpm: preCalculations.rotationRpm / 10               || invalidValue,
             penetrationRate: preCalculations.penetrationRate / 10       || invalidValue,
+            bitWeight: preCalculations.bitWeight / 10                   || invalidValue,
+            outsideTemp: preCalculations.outsideTemp                    || invalidValue,
             mastAngle: preCalculations.mastAngle / 100                  || invalidValue,
             deckRoll: ((preCalculations.deckRoll) / 100)                || invalidValue,
             deckPitch: ((preCalculations.deckPitch) / 100)              || invalidValue,
-            headRackBackProxyStatus: uData[32],
-            footClampPressureSwitch: uData[33],
-            coolantLevelSensor: uData[34],
+            rodLoaderPosition: preCalculations.rodLoaderPosition        || invalidValue,
+            headRefPosition: preCalculations.headRefPosition                                  || invalidValue,
             rotationReversePressure: preCalculations.rotationReversePressure / 10             || invalidValue,
             rotationForwardPressure: preCalculations.rotationForwardPressure / 10             || invalidValue,
             holdBackPressure: (preCalculations.holdBackPressure) / 100                        || invalidValue,
             pulldownPressure: (preCalculations.pulldownPressure) / 100                        || invalidValue,
             waterPressure: preCalculations.waterPressure / 10                                 || invalidValue,
             mainPumpPressure: (preCalculations.mainPumpPressure) / 100                        || invalidValue,
-            winchDownPressure: preCalculations.winchDownPressure / 10                         || invalidValue,
-            winchUpPressure: preCalculations.winchUpPressure / 10                             || invalidValue,
-            bitWeight: preCalculations.bitWeight / 10                                         || invalidValue,
-            driller: preCalculations.driller,
-            timestamp: preCalculations.timestamp
+            driller: preCalculations.driller                                                  || invalidValue,
+            compressorDischargeTemperature: preCalculations.compressorDischargeTemperature    || invalidValue,
+            compressorLinePressure: preCalculations.compressorLinePressure / 10               || invalidValue,
+            compressorInterstagePressure: preCalculations.compressorInterstagePressure / 10   || invalidValue,
+            DownholeAirPressure: preCalculations.DownholeAirPressure / 10                     || invalidValue,
+            engineOilTemp: preCalculations.engineOilTemp                                      || invalidValue,
         }
-        console.log(postCalculations)
-        // TIMESTAMPS
         
         MKY08.create({
             time: postCalculations.timestamp,
@@ -253,12 +252,12 @@ export default {
             compressorInterstagePressure: postCalculations.compressorInterstagePressure,
             DownholeAirPressure: postCalculations.DownholeAirPressure,
             engineOilTemp: postCalculations.engineOilTemp,
-            year: timeConverter(timestamp).year,
-            month: timeConverter(timestamp).month,
-            date: timeConverter(timestamp).date,
-            hour: timeConverter(timestamp).hour,
-            minute: timeConverter(timestamp).min,
-            second: timeConverter(timestamp).sec
+            year: timeConverter(rawCalculations.timestamp).year,
+            month: timeConverter(rawCalculations.timestamp).month,
+            date: timeConverter(rawCalculations.timestamp).date,
+            hour: timeConverter(rawCalculations.timestamp).hour,
+            minute: timeConverter(rawCalculations.timestamp).min,
+            second: timeConverter(rawCalculations.timestamp).sec
         }).then(() => console.log("Log Created"));
     
         MKY08RAW.create({
@@ -292,12 +291,12 @@ export default {
             compressorInterstagePressure: rawCalculations.compressorInterstagePressure,
             DownholeAirPressure: rawCalculations.DownholeAirPressure,
             engineOilTemp: rawCalculations.engineOilTemp,
-            year: timeConverter(timestamp).year,
-            month: timeConverter(timestamp).month,
-            date: timeConverter(timestamp).date,
-            hour: timeConverter(timestamp).hour,
-            minute: timeConverter(timestamp).min,
-            second: timeConverter(timestamp).sec
+            year: timeConverter(rawCalculations.timestamp).year,
+            month: timeConverter(rawCalculations.timestamp).month,
+            date: timeConverter(rawCalculations.timestamp).date,
+            hour: timeConverter(rawCalculations.timestamp).hour,
+            minute: timeConverter(rawCalculations.timestamp).min,
+            second: timeConverter(rawCalculations.timestamp).sec
         }).then(() => console.log("Log Created"));
     
     }

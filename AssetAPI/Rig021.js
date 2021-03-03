@@ -16,7 +16,7 @@ function timeConverter(UNIX_timestamp) {
         date: date,
         month: month,
         year: year,
-        hour: (hour - 8),
+        hour: hour,
         min: min,
         sec: sec
     };
@@ -83,9 +83,7 @@ export default {
             winchUpPressure: uData[50] * 256 + uData[49]             || invalidValue,
             bitWeight: uData[64] * 265 + uData[63]                   || invalidValue,
             driller: "Not Signed in",
-            timestamp: (((uData[66] << 8) + uData[65]).toString() + ((((uData[70] << 8 | uData[69]) << 8 | uData[68]) << 8) + uData[67]).toString())   || invalidValue,
         }
-    
         
         let driller1 = String.fromCharCode(uData[51]);
         let driller2 = String.fromCharCode(uData[52]);
@@ -95,8 +93,6 @@ export default {
         let driller6 = String.fromCharCode(uData[56]);
         let driller7 = String.fromCharCode(uData[57]);
         let driller8 = String.fromCharCode(uData[58]);
-        
-        console.log(rawCalculations.timestamp)
     
         preCalculations.driller = `${driller1 + driller2 + driller3 + driller4 + driller5 + driller6 + driller7 + driller8}`;
         // Error Checking
@@ -127,37 +123,37 @@ export default {
         }
     
         if (preCalculations.holdBackPressure > 50000) {
-            console.log("OIL PRESSURE:", preCalculations.holdBackPressure)
+            console.log("Holdback Pressure:", preCalculations.holdBackPressure)
             preCalculations.holdBackPressure = null
         };
     
         if (preCalculations.pulldownPressure > 50000) {
-            console.log("OIL PRESSURE:", preCalculations.pulldownPressure)
+            console.log("Pulldown Pressure:", preCalculations.pulldownPressure)
             preCalculations.pulldownPressure = null;
         };
     
         if (preCalculations.waterPressure > 50000) {
-            console.log("OIL PRESSURE:", preCalculations.waterPressure)
+            console.log("Water Pressure:", preCalculations.waterPressure)
             preCalculations.waterPressure = null;
         };
     
         if (preCalculations.mainPumpPressure > 50000) {
-            console.log("OIL PRESSURE:", preCalculations.mainPumpPressure)
+            console.log("Main Pump Pressure:", preCalculations.mainPumpPressure)
             preCalculations.mainPumpPressure = null
         };
     
         if (preCalculations.winchUpPressure > 50000) {
-            console.log("OIL PRESSURE:", preCalculations.winchUpPressure)
+            console.log("Winch Up Pressure:", preCalculations.winchUpPressure)
             preCalculations.winchUpPressure = null
         };
     
         if (preCalculations.winchDownPressure > 50000) {
-            console.log("OIL PRESSURE:", preCalculations.winchDownPressure)
+            console.log("Winch Down Pressure:", preCalculations.winchDownPressure)
             preCalculations.winchDownPressure = null
         };
     
         if (preCalculations.bitWeight > 50000) {
-            console.log("OIL PRESSURE:", preCalculations.bitWeight)
+            console.log("Bit Weight:", preCalculations.bitWeight)
             preCalculations.bitWeight = null
         };
     
@@ -187,15 +183,11 @@ export default {
             winchDownPressure: preCalculations.winchDownPressure / 10                         || invalidValue,
             winchUpPressure: preCalculations.winchUpPressure / 10                             || invalidValue,
             bitWeight: preCalculations.bitWeight / 10                                         || invalidValue,
-            driller: preCalculations.driller,
-            timestamp: preCalculations.timestamp
+            driller: preCalculations.driller
         }
-        // console.log(postCalculations)
-        // TIMESTAMPS
-        
     
         MKY021.create({
-            ts: postCalculations.timestamp,
+            time: postCalculations.timestamp,
             engineRPM: postCalculations.engineRPM,
             oilPressure: postCalculations.oilPressure,
             engineHours: postCalculations.engineHours,
@@ -219,11 +211,17 @@ export default {
             winchDownPressure: postCalculations.winchDownPressure,
             winchUpPressure: postCalculations.winchUpPressure,
             bitWeight: postCalculations.bitWeight,
-            driller: postCalculations.driller || null
+            driller: postCalculations.driller || null,
+            year: timeConverter(rawCalculations.timestamp).year,
+            month: timeConverter(rawCalculations.timestamp).month,
+            date: timeConverter(rawCalculations.timestamp).date,
+            hour: timeConverter(rawCalculations.timestamp).hour,
+            minute: timeConverter(rawCalculations.timestamp).min,
+            second: timeConverter(rawCalculations.timestamp).sec
         }).then(() => console.log("Log Created"));
     
         MKY021RAW.create({
-            ts: rawCalculations.timestamp,
+            time: rawCalculations.timestamp,
             engineRPM: rawCalculations.engineRPM,
             oilPressure: rawCalculations.oilPressure,
             engineHours: rawCalculations.engineHours,
@@ -247,7 +245,13 @@ export default {
             winchDownPressure: rawCalculations.winchDownPressure,
             winchUpPressure: rawCalculations.winchUpPressure,
             bitWeight: postCalculations.bitWeight,
-            driller: postCalculations.driller || null
+            driller: postCalculations.driller || null,
+            year: timeConverter(rawCalculations.timestamp).year,
+            month: timeConverter(rawCalculations.timestamp).month,
+            date: timeConverter(rawCalculations.timestamp).date,
+            hour: timeConverter(rawCalculations.timestamp).hour,
+            minute: timeConverter(rawCalculations.timestamp).min,
+            second: timeConverter(rawCalculations.timestamp).sec
         }).then(() => console.log("Log Created"));
     
     }
