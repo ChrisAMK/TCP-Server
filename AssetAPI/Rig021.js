@@ -34,7 +34,7 @@ export default {
             engineHours: uData[59] * 256 + uData[60]                || invalidValue,
             coolantTemp: uData[15] * 256 + uData[14]                || invalidValue,
             headPosition: uData[17] * 256 + uData[16]               || invalidValue,
-            holeDepth: uData[19] * 256 + uData[18]                  || invalidValue,
+            holeDepth: (((uData[21] << 8 | uData[20]) << 8 | uData[19]) << 8) + uData[18]       || invalidValue,
             rotationRpm: uData[23] * 256 + uData[22]                || invalidValue,
             penetrationRate: uData[25] * 256 + uData[24]            || invalidValue,
             mastAngle: uData[27] * 256 + uData[26]                  || invalidValue,
@@ -52,7 +52,8 @@ export default {
             winchDownPressure: uData[48] * 256 + uData[47]           || invalidValue,
             winchUpPressure: uData[50] * 256 + uData[49]             || invalidValue,
             bitWeight: uData[64] * 265 + uData[63]                   || invalidValue,
-            driller: "Not Signed in"
+            driller: "Not Signed in",
+            timestamp: (((uData[70] << 8 | uData[69]) << 8 | uData[68]) << 8) + uData[67]   || invalidValue,
         }
     
         let preCalculations = {
@@ -63,7 +64,7 @@ export default {
             engineHours: uData[60] * 256 + uData[59]                || invalidValue,
             coolantTemp: uData[15] * 256 + uData[14]                || invalidValue,
             headPosition: uData[17] * 256 + uData[16]               || invalidValue,
-            holeDepth: uData[19] * 256 + uData[18]                  || invalidValue,
+            holeDepth: (((uData[21] << 8 | uData[20]) << 8 | uData[19]) << 8) + uData[18]       || invalidValue,
             rotationRpm: uData[23] * 256 + uData[22]                || invalidValue,
             penetrationRate: uData[25] * 256 + uData[24]            || invalidValue,
             mastAngle: uData[27] * 256 + uData[26]                  || invalidValue,
@@ -81,7 +82,8 @@ export default {
             winchDownPressure: uData[48] * 256 + uData[47]           || invalidValue,
             winchUpPressure: uData[50] * 256 + uData[49]             || invalidValue,
             bitWeight: uData[64] * 265 + uData[63]                   || invalidValue,
-            driller: "Not Signed in"
+            driller: "Not Signed in",
+            timestamp: invalidValue,
         }
     
         
@@ -94,12 +96,9 @@ export default {
         let driller7 = String.fromCharCode(uData[57]);
         let driller8 = String.fromCharCode(uData[58]);
         
-        let firstFive = (uData[62] * 256 + uData[61]).toString();
-        let secondFive = (uData[66] * 256 + uData[65]).toString();
-        let thridFive = (uData[68] * 256 + uData[67]).toString();
-        let forthFive = (uData[70] * 256 + uData[69]).toString();
+        let firstFour = toString(uData[66] << 8) + uData[65];
+        console.log(firstFour, "FIRST FORU")
     
-        preCalculations.timestamp = firstFive + secondFive + thridFive + forthFive;
         preCalculations.driller = `${driller1 + driller2 + driller3 + driller4 + driller5 + driller6 + driller7 + driller8}`;
         // Error Checking
     

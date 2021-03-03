@@ -1,6 +1,7 @@
 import net from "net";
 import db from "./models/index.js";
-import API from "./API.js";
+import RIG21 from "./AssetAPI/Rig021";
+import RIG8 from "./AssetAPI/Rig08";
 
 const syncModels = async () => {
     db.MKY021.sync();
@@ -35,7 +36,7 @@ syncModels().then(() => {
 
                 case 21:
                     // Rig 21 Code
-                    API.saveRig21(data);
+                    RIG21.saveRig21(data);
                     console.log("DATA FROM RIG 21", Math.random(10));
                     break;
 
@@ -56,7 +57,7 @@ syncModels().then(() => {
 
     });
 
-    server.listen(1337, '192.168.1.31', () => {
+    server.listen(1337, 'localhost', () => {
         console.log('Server Starting! on: ', server.address());
     });
 });
