@@ -8,139 +8,171 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
   // logging: false
 });
 
+const DataTypes = Sequelize.DataTypes;
+const literal = Sequelize.literal;
+
 const MKY021RAW = sequelize.define("MKY021RAW", {
 
   time: {
-      type: Sequelize.DataTypes.INTEGER,
-      allowNull: true
+    type: DataTypes.INTEGER,
+    allowNull: true
   },
 
-  engineRPM: {
-    type: Sequelize.DataTypes.INTEGER,
+  engineRpm: {
+    type: DataTypes.INTEGER,
     allowNull: true
   },
 
   oilPressure: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true
   },
 
   engineHours: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   coolantTemp: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   headPosition: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   holeDepth: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   rotationRpm: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   penetrationRate: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   mastAngle: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   deckRoll: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   deckPitch: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   headRackBackProxyStatus: {
-    type: Sequelize.DataTypes.BOOLEAN,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   footClampPressureSwitch: {
-    type: Sequelize.DataTypes.BOOLEAN,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   coolantLevelSensor: {
-    type: Sequelize.DataTypes.BOOLEAN,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   rotationReversePressure: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   rotationForwardPressure: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   holdBackPressure: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   pulldownPressure: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   waterPressure: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   mainPumpPressure: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   winchDownPressure: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   winchUpPressure: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   bitWeight: {
-    type: Sequelize.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 
   driller: {
-    type: Sequelize.DataTypes.STRING,
+    type: DataTypes.STRING,
     allowNull: true,
   },
 
   createdAt: {
     type: 'TIMESTAMP',
-    defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+    defaultValue: literal('CURRENT_TIMESTAMP'),
     allowNull: false
-  }
+  },
 
+  year: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  month: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+
+  date: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  hour: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  minute: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  second: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
 },
 {
   timestamps: false

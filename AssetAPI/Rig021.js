@@ -1,11 +1,9 @@
-import moment from "moment";
 import MKY021 from "./models/mky021.js";
-import MKY021RAW from './models/mky021raw.js';
-
+import MKY021RAW from "./models/mky21raw.js";
 
 const invalidValue = null;
 
-function timeConverter(UNIX_timestamp){
+function timeConverter(UNIX_timestamp) {
     var a = new Date(UNIX_timestamp);
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var year = a.getFullYear();
@@ -23,10 +21,9 @@ function timeConverter(UNIX_timestamp){
         sec: sec
     };
     return time;
-  }
+}
 
 export default {
-
     saveRig21: (uData) => {
 
         let rawCalculations = {
@@ -57,7 +54,7 @@ export default {
             bitWeight: uData[64] * 265 + uData[63]                   || invalidValue,
             driller: "Not Signed in"
         }
-
+    
         let preCalculations = {
             
             // DATA CALCULATIONS
@@ -86,7 +83,7 @@ export default {
             bitWeight: uData[64] * 265 + uData[63]                   || invalidValue,
             driller: "Not Signed in"
         }
-
+    
         
         let driller1 = String.fromCharCode(uData[51]);
         let driller2 = String.fromCharCode(uData[52]);
@@ -101,71 +98,71 @@ export default {
         let secondFive = (uData[66] * 256 + uData[65]).toString();
         let thridFive = (uData[68] * 256 + uData[67]).toString();
         let forthFive = (uData[70] * 256 + uData[69]).toString();
-
+    
         preCalculations.timestamp = firstFive + secondFive + thridFive + forthFive;
         preCalculations.driller = `${driller1 + driller2 + driller3 + driller4 + driller5 + driller6 + driller7 + driller8}`;
         // Error Checking
-
+    
         if (preCalculations.oilPressure > 50000) {
             console.log("Engine Oil: ", preCalculations.oilPressure > 50000);
             preCalculations.oilPressure = null;
         };
-
+    
         if (preCalculations.penetrationRate > 50000) {
             console.log("Penetration Rate: ", preCalculations.penetrationRate);
             preCalculations.penetrationRate = null;
         };
-
+    
         if (preCalculations.rotationForwardPressure > 50000) {
             console.log("Rotation Forward Pressure: ", preCalculations.rotationForwardPressure);
             preCalculations.rotationForwardPressure = null;
         }
-
+    
         if (preCalculations.rotationReversePressure > 50000) {
             console.log("Rotation Reverse Pressure: ", preCalculations.rotationReversePressure)
             preCalculations.rotationReversePressure = null
         };
-
+    
         if (preCalculations.rotationRpm > 50000) {
             console.log("Rotation RPM: ", preCalculations.rotationRpm);
             preCalculations.rotationRpm = null;
         }
-
+    
         if (preCalculations.holdBackPressure > 50000) {
             console.log("OIL PRESSURE:", preCalculations.holdBackPressure)
             preCalculations.holdBackPressure = null
         };
-
+    
         if (preCalculations.pulldownPressure > 50000) {
             console.log("OIL PRESSURE:", preCalculations.pulldownPressure)
             preCalculations.pulldownPressure = null;
         };
-
+    
         if (preCalculations.waterPressure > 50000) {
             console.log("OIL PRESSURE:", preCalculations.waterPressure)
             preCalculations.waterPressure = null;
         };
-
+    
         if (preCalculations.mainPumpPressure > 50000) {
             console.log("OIL PRESSURE:", preCalculations.mainPumpPressure)
             preCalculations.mainPumpPressure = null
         };
-
+    
         if (preCalculations.winchUpPressure > 50000) {
             console.log("OIL PRESSURE:", preCalculations.winchUpPressure)
             preCalculations.winchUpPressure = null
         };
-
+    
         if (preCalculations.winchDownPressure > 50000) {
             console.log("OIL PRESSURE:", preCalculations.winchDownPressure)
             preCalculations.winchDownPressure = null
         };
-
+    
         if (preCalculations.bitWeight > 50000) {
             console.log("OIL PRESSURE:", preCalculations.bitWeight)
             preCalculations.bitWeight = null
         };
-
+    
         let postCalculations = {
             
             // DATA CALCULATIONS
@@ -198,7 +195,7 @@ export default {
         console.log(postCalculations)
         // TIMESTAMPS
         
-
+    
         MKY021.create({
             ts: postCalculations.timestamp,
             engineRPM: postCalculations.engineRPM,
@@ -226,7 +223,7 @@ export default {
             bitWeight: postCalculations.bitWeight,
             driller: postCalculations.driller || null
         }).then(() => console.log("Log Created"));
-
+    
         MKY021RAW.create({
             ts: rawCalculations.timestamp,
             engineRPM: rawCalculations.engineRPM,
@@ -254,8 +251,7 @@ export default {
             bitWeight: postCalculations.bitWeight,
             driller: postCalculations.driller || null
         }).then(() => console.log("Log Created"));
-
+    
     }
-
-
 }
+
