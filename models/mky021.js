@@ -138,6 +138,47 @@ const MKY021 = sequelize.define("MKY021", {
     allowNull: true,
   },
 
+  engineTorque: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  intercoolerTemp: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  totalFuelUsed: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  intakeManifoldTemp: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  turboRpm: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  electricalPotential: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+ engineOilLevel: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  createdAt: {
+    type: 'TIMESTAMP',
+    defaultValue: literal('CURRENT_TIMESTAMP'),
+    allowNull: false
+  },
+
   createdAt: {
     type: 'TIMESTAMP',
     defaultValue: literal('CURRENT_TIMESTAMP'),
