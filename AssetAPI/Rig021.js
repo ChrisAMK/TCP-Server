@@ -187,7 +187,7 @@ export default {
         }
     
         MKY021.create({
-            time: postCalculations.timestamp,
+            time: rawCalculations.timestamp,
             engineRPM: postCalculations.engineRPM,
             oilPressure: postCalculations.oilPressure,
             engineHours: postCalculations.engineHours,
@@ -219,7 +219,7 @@ export default {
             minute: timeConverter(rawCalculations.timestamp).min,
             second: timeConverter(rawCalculations.timestamp).sec
         }).then(() => console.log("Log Created"));
-    
+        console.log(rawCalculations.timestamp, "TIMESTAMP")
         MKY021RAW.create({
             time: rawCalculations.timestamp,
             engineRPM: rawCalculations.engineRPM,

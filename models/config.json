@@ -1,6 +1,10 @@
 { 
   "username": "root",
+<<<<<<< HEAD
   "password": "root",
+=======
+  "password": "Sm0thering.",
+>>>>>>> 8e8126f4e66dd098af59ef8d5c633175bebe684a
   "database": "drillmonitoring",
   "host": "localhost",
   "dialect": "mysql"
