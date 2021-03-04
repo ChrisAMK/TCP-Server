@@ -14,7 +14,7 @@ const literal = Sequelize.literal;
 const MKY021RAW = sequelize.define("MKY021RAW", {
 
   time: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BIGINT,
     allowNull: true
   },
 

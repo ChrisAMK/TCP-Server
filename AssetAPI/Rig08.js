@@ -261,7 +261,7 @@ export default {
         }).then(() => console.log("Log Created"));
     
         MKY08RAW.create({
-            ts: rawCalculations.timestamp,
+            time: rawCalculations.timestamp,
             engineRPM: rawCalculations.engineRPM,
             oilPressure: rawCalculations.oilPressure,
             engineHours: rawCalculations.engineHours,
