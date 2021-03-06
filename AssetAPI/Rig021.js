@@ -219,7 +219,7 @@ export default {
             minute: timeConverter(rawCalculations.timestamp).min,
             second: timeConverter(rawCalculations.timestamp).sec
         }).then(() => console.log("Log Created"));
-        console.log(rawCalculations.timestamp, "TIMESTAMP")
+        console.log(rawCalculations)
         MKY021RAW.create({
             time: rawCalculations.timestamp,
             engineRPM: rawCalculations.engineRPM,

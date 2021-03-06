@@ -24,7 +24,7 @@ const MKY021 = sequelize.define("MKY021", {
   },
 
   oilPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true
   },
 
@@ -34,17 +34,17 @@ const MKY021 = sequelize.define("MKY021", {
   },
 
   coolantTemp: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   headPosition: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   holeDepth: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
@@ -54,129 +54,88 @@ const MKY021 = sequelize.define("MKY021", {
   },
 
   penetrationRate: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   mastAngle: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   deckRoll: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   deckPitch: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   headRackBackProxyStatus: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   footClampPressureSwitch: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   coolantLevelSensor: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   rotationReversePressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   rotationForwardPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   holdBackPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   pulldownPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   waterPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   mainPumpPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   winchDownPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   winchUpPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   bitWeight: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   driller: {
     type: DataTypes.STRING,
     allowNull: true,
-  },
-
-  engineTorque: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-
-  intercoolerTemp: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-
-  totalFuelUsed: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-
-  intakeManifoldTemp: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-
-  turboRpm: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-
-  electricalPotential: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-
- engineOilLevel: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-
-  createdAt: {
-    type: 'TIMESTAMP',
-    defaultValue: literal('CURRENT_TIMESTAMP'),
-    allowNull: false
   },
 
   createdAt: {
@@ -214,7 +173,6 @@ const MKY021 = sequelize.define("MKY021", {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-
 
 },
 {

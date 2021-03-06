@@ -35,7 +35,7 @@ syncModels().then(() => {
 
                 case 21:
                     // Rig 21 Code
-                    RIG21.saveRig21(data);
+                    //RIG21.saveRig21(data);
                     console.log("DATA FROM RIG 21", Math.random(10));
                     break;
 
@@ -55,7 +55,7 @@ syncModels().then(() => {
 
     });
 
-    server.listen(1337, 'localhost', () => {
+    server.listen(1337, '192.168.1.31', () => {
         console.log('Server Starting! on: ', server.address());
     });
 });

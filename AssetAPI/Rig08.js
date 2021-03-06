@@ -74,7 +74,7 @@ export default {
             oilPressure: uData[13] * 256 + uData[12]                                            || invalidValue,
             engineHours: (((uData[17] << 8 | uData[16]) << 8 | uData[15]) << 8) + uData[14]     || invalidValue,
             coolantTemp: uData[19] * 256 + uData[18]                                            || invalidValue,
-            headPosition: uData[21] * 256 + uData[20]                                           || invalidValue,
+            headPosition: uData[21] * 256 + uData[20] / 100                                          || invalidValue,
             holeDepth: (((uData[25] << 8 | uData[24]) << 8 | uData[23]) << 8) + uData[22]       || invalidValue,
             rotationRpm: uData[27] * 256 + uData[26]                                            || invalidValue,
             penetrationRate: uData[29] * 256 + uData[28]                                        || invalidValue,
@@ -96,8 +96,8 @@ export default {
             compressorDischargeTemperature: uData[65] * 256 + uData[64]                     || invalidValue,
             compressorLinePressure: uData[67] * 256 + uData[66]                             || invalidValue,
             compressorInterstagePressure: uData[69] * 256 + uData[68]                       || invalidValue,
-            DownholeAirPressure: uData[70] * 256 + uData[71]                                || invalidValue,
-            engineOilTemp: uData[72] * 256 + uData[73]                                      || invalidValue,
+            DownholeAirPressure: uData[71] * 256 + uData[70]                                || invalidValue,
+            engineOilTemp: uData[73] * 256 + uData[72]                                      || invalidValue,
             engineTorque: uData[75] * 256 + uData[74]                                                || invalidValue,
             intercoolerTemp: uData[77] * 256 + uData[76]                                             || invalidValue,
             totalFuelUsed: (((uData[81] << 8 | uData[80]) << 8 | uData[79]) << 8) + uData[78]        || invalidValue,
@@ -208,19 +208,19 @@ export default {
         let postCalculations = {
             
             // DATA CALCULATIONS
-            engineRpm: (preCalculations.engineRpm / 10)                 || invalidValue,
+            engineRpm: preCalculations.engineRpm                        || invalidValue,
             oilPressure: preCalculations.oilPressure / 10               || invalidValue,
             engineHours: preCalculations.engineHours                    || invalidValue,
             coolantTemp: (preCalculations.coolantTemp) / 10             || invalidValue,
-            headPosition: preCalculations.headPosition /10              || invalidValue,
+            headPosition: preCalculations.headPosition / 10              || invalidValue,
             holeDepth: preCalculations.holeDepth / 10                   || invalidValue,
             rotationRpm: preCalculations.rotationRpm / 10               || invalidValue,
             penetrationRate: preCalculations.penetrationRate / 10       || invalidValue,
             bitWeight: preCalculations.bitWeight / 10                   || invalidValue,
-            outsideTemp: preCalculations.outsideTemp                    || invalidValue,
-            mastAngle: preCalculations.mastAngle / 100                  || invalidValue,
-            deckRoll: ((preCalculations.deckRoll) / 100)                || invalidValue,
-            deckPitch: ((preCalculations.deckPitch) / 100)              || invalidValue,
+            outsideTemp: preCalculations.outsideTemp / 10               || invalidValue,
+            mastAngle: preCalculations.mastAngle / 10                  || invalidValue,
+            deckRoll: ((preCalculations.deckRoll) / 10)                || invalidValue,
+            deckPitch: ((preCalculations.deckPitch) / 10)              || invalidValue,
             rodLoaderPosition: preCalculations.rodLoaderPosition        || invalidValue,
             headRefPosition: preCalculations.headRefPosition                                  || invalidValue,
             rotationReversePressure: preCalculations.rotationReversePressure / 10             || invalidValue,
@@ -245,8 +245,8 @@ export default {
         }
         
         MKY08.create({
-            time: postCalculations.timestamp,
-            engineRPM: postCalculations.engineRPM,
+            time: preCalculations.timestamp,
+            engineRPM: postCalculations.engineRpm,
             oilPressure: postCalculations.oilPressure,
             engineHours: postCalculations.engineHours,
             coolantTemp: postCalculations.coolantTemp,
@@ -287,7 +287,7 @@ export default {
             minute: timeConverter(rawCalculations.timestamp).min,
             second: timeConverter(rawCalculations.timestamp).sec
         }).then(() => console.log("Log Created"));
-    
+        console.log(rawCalculations)
         MKY08RAW.create({
             time: rawCalculations.timestamp,
             engineRPM: rawCalculations.engineRPM,

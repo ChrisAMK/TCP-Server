@@ -24,7 +24,7 @@ const MKY08RAW = sequelize.define("MKY08RAW", {
   },
 
   oilPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true
   },
 
@@ -34,17 +34,17 @@ const MKY08RAW = sequelize.define("MKY08RAW", {
   },
 
   coolantTemp: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   headPosition: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   holeDepth: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
@@ -54,72 +54,72 @@ const MKY08RAW = sequelize.define("MKY08RAW", {
   },
 
   penetrationRate: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   bitWeight: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   outsideTemp: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   mastAngle: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   deckRoll: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   deckPitch: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   rodLoaderPosition: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   headRefPosition: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   rotationReversePressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   rotationForwardPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   holdBackPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   pulldownPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   waterPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   mainPumpPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
@@ -129,31 +129,66 @@ const MKY08RAW = sequelize.define("MKY08RAW", {
   },
 
   compressorSumpPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   compressorDischargeTemperature: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   compressorLinePressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   compressorInterstagePressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   DownholeAirPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   engineOilTemp: {
+    type: DataTypes.DECIMAL,
+    allowNull: true,
+  },
+
+  engineTorque: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  intercoolerTemp: {
+    type: DataTypes.DECIMAL,
+    allowNull: true,
+  },
+
+  totalFuelUsed: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  intakeManifoldTemp: {
+    type: DataTypes.DECIMAL,
+    allowNull: true,
+  },
+
+  turboRpm: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+  electricalPotential: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+
+ engineOilLevel: {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
@@ -195,9 +230,9 @@ const MKY08RAW = sequelize.define("MKY08RAW", {
   },
 
 },
-{
-  timestamps: false
-}
+  {
+    timestamps: false
+  }
 );
 
 export default MKY08RAW;

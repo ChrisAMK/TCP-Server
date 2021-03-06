@@ -24,7 +24,7 @@ const MKY021RAW = sequelize.define("MKY021RAW", {
   },
 
   oilPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true
   },
 
@@ -34,17 +34,17 @@ const MKY021RAW = sequelize.define("MKY021RAW", {
   },
 
   coolantTemp: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   headPosition: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   holeDepth: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
@@ -54,82 +54,82 @@ const MKY021RAW = sequelize.define("MKY021RAW", {
   },
 
   penetrationRate: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   mastAngle: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   deckRoll: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   deckPitch: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   headRackBackProxyStatus: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   footClampPressureSwitch: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   coolantLevelSensor: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
 
   rotationReversePressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   rotationForwardPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   holdBackPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   pulldownPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   waterPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   mainPumpPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   winchDownPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   winchUpPressure: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
   bitWeight: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL,
     allowNull: true,
   },
 
